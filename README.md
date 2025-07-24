@@ -1,6 +1,3 @@
-# Escuela-Municipal-de-M-sica--Sistema-de-Gesti-n-Web
-Bienvenido al repositorio del sistema web para la Escuela Municipal de Música. Esta aplicación está diseñada para facilitar la gestión de alumnos, renovaciones, lista de espera y bonificaciones, así como la administración de usuarios con acceso al panel de control.
-
 # Escuela Municipal de Música - Sistema de Gestión Web
 
 ## ¿Qué hace esta aplicación?
@@ -47,11 +44,83 @@ CREATE DATABASE escuela_musica CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'usuario_web'@'localhost' IDENTIFIED BY 'contrasena_segura';
 GRANT ALL PRIVILEGES ON escuela_musica.* TO 'usuario_web'@'localhost';
 FLUSH PRIVILEGES;
+```
 
 Comienza a gestionar alumnos y usuarios.
 
-Licencia
-Este proyecto es de código abierto. Puedes usarlo y modificarlo para tus necesidades, pero agradecemos que mantengas esta información y des créditos al autor original.
+### 3. Importar tablas
+Importa el archivo `sql/database.sql` que contiene la estructura y datos iniciales necesarios para la aplicación.
 
-Contacto
-Para dudas, sugerencias o reportes de errores, por favor abre un issue en este repositorio.
+### 4. Configurar conexión a la base de datos
+Edita el archivo `includes/db.php` para ajustar los datos de conexión:
+```sql
+<?php
+$host = 'localhost';
+$db   = 'escuela_musica';
+$user = 'usuario_web';
+$pass = 'contrasena_segura';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ]);
+} catch (PDOException $e) {
+    die('Error de conexión: ' . $e->getMessage());
+}
+```
+### 5. Crear usuario administrador
+Ejecuta este SQL para crear un primer usuario administrador (cambia el email y el hash por uno adecuado):
+```sql
+INSERT INTO usuarios (nombre, email, password) VALUES (
+    'Administrador',
+    'admin@escuela.local',
+    '$2y$10$EjemploDeHashDeContraseñaGeneradoPorPHP'
+);
+```
+**Nota:** La contraseña debe estar cifrada con `password_hash()`. Puedes generar un hash usando este pequeño script PHP:
+```sql
+<?php
+echo password_hash('tu_contraseña', PASSWORD_DEFAULT);
+```
+
+### 6. Acceder a la aplicación
+- Abre el navegador y navega a la URL donde está alojada la aplicación.
+- Inicia sesión con el email y contraseña del administrador creado.
+- Comienza a gestionar alumnos y usuarios.
+
+# Licencia de Uso - Código Abierto con Condiciones
+
+Copyright (c) 2025 Rodrigo Perez
+---
+Por la presente, se concede permiso para utilizar, copiar, modificar y distribuir este software y su código fuente, tanto para uso público como privado, bajo las siguientes condiciones:
+
+1. **Mantenimiento de derechos de autor:**  
+   El aviso de copyright original y los créditos al autor Rodrigo Perez deben mantenerse en todas las copias, modificaciones o distribuciones del software.
+
+2. **Notificación de cambios:**  
+   Cualquier modificación, mejora o cambio realizado al código original debe ser claramente indicado y documentado en los archivos correspondientes o en la documentación adjunta.
+
+3. **Permiso para publicación:**  
+   Antes de publicar, distribuir o hacer público cualquier copia, versión modificada o derivada de este software, es obligatorio solicitar y obtener autorización previa y por escrito contactando a Rodrigo Perez mediante:
+
+   - Correo electrónico: rodrigo@plenix.net  
+   - Instagram: [@__rodrigoo.06](https://www.instagram.com/__rodrigoo.06)
+
+---
+
+**Descargo de responsabilidad:**  
+Este software se proporciona "tal cual", sin garantías expresas o implícitas de ningún tipo. El autor no se hace responsable de daños o perjuicios derivados del uso o mal uso del software.
+
+---
+
+Al usar, modificar o distribuir este software, usted acepta y se compromete a cumplir con las condiciones anteriormente expuestas.
+
+---
+
+**Fecha de emisión:** Julio 2025
+
+
