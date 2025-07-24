@@ -1,0 +1,30 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fefefe;
+    color: #333;
+}
+
+h2 {
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.table thead {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.table tbody tr.baja {
+    background-color: #f8d7da !important;
+    color: #721c24;
+}
+
+.btn-primary {
+    background-color: #1abc9c;
+    border-color: #16a085;
+}
+
+.btn-primary:hover {
+    background-color: #16a085;
+    border-color: #138d75;
+}
