@@ -1,5 +1,5 @@
 # Escuela Municipal de Música - Sistema de Gestión Web
-
+*El siguiente código puede dar fallo o estar incompleto.*
 ## ¿Qué hace esta aplicación?
 
 - Permite registrar nuevos alumnos y gestionar renovaciones.
